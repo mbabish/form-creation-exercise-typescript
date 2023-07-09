@@ -1,3 +1,4 @@
+// External libraries
 import React, { useState } from 'react';
 
 // CSS
@@ -5,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 // External components
-import { Container, Row, Form } from 'react-bootstrap';
+import { Stack, Form } from 'react-bootstrap';
 
 // Internal Components
 import BandForm from "./components/BandForm";
@@ -26,22 +27,16 @@ function App() {
   }
 
   return (
-    <Container>
-      <Row>
-        <h2>Select a band</h2>
-        <Form.Select onChange={onSelectBand}>
-          <option value="0">Ska Band</option>
-          <option value="1">K-Pop Band</option>
-          <option value="2">Punk Band</option>
-        </Form.Select>
-      </Row>
-      <Row>
-        <hr className="divider"/>
-      </Row>
-      <Row>
-        <BandForm band={bands[bandIndex]} />
-      </Row>
-  </Container>
+    <Stack gap={2} className="col-md-10 mx-auto">
+      <h2>Select a band</h2>
+      <Form.Select onChange={onSelectBand}>
+        <option value="0">Ska Band</option>
+        <option value="1">K-Pop Band</option>
+        <option value="2">Punk Band</option>
+      </Form.Select>
+      <hr className="divider"/>
+      <BandForm band={bands[bandIndex]} />
+    </Stack>
   );
 }
 

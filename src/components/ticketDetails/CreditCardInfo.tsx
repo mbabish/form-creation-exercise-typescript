@@ -1,109 +1,89 @@
-// External libraries
-import { useState, useEffect } from "react";
-import _ from "lodash";
-
 // External components
-import { Container, Row, Col, FloatingLabel, Form, Button } from 'react-bootstrap';
+import { Form, Row, Col, InputGroup, FloatingLabel } from 'react-bootstrap';
+
+// Properties
+import IShoppingCartHooks from "../../interfaces/shoppingCart/IShoppingCartHooks";
+import ICreditCardInfo from "../../interfaces/shoppingCart/ICreditCardInfo";
 
 // Implementation
-function CreditCardInfo() {
-  const [creditCardInfo, setCreditCardInfo] = useState({
-    cardNumber: '',
-    expirationDate: '',
-    CVV: ''
-  });
+function CreditCardInfo(props: { shoppingCartHooks: IShoppingCartHooks }) {
+
+  // Alias for shopping cart hook properties
+  var creditCardInfo: ICreditCardInfo = props.shoppingCartHooks.creditCardInfo;
+  var isPurchaseInProgress = props.shoppingCartHooks.isPurchaseInProgress;
 
   // Credit Card Info
   const updateCardNumber = (e: any) => {
     var newCardNumber = e.target.value;
     if (creditCardInfo.cardNumber !== newCardNumber) {
-      var newCreditCardInfo = _.cloneDeep(creditCardInfo);
+      var newCreditCardInfo = {...creditCardInfo};
       newCreditCardInfo.cardNumber = newCardNumber;
-      setCreditCardInfo(newCreditCardInfo);
+      props.shoppingCartHooks.setCreditCardInfo(newCreditCardInfo);
     }
   };
-  const updateExpirationDate = (e: any) => {
-    var newExpirationDate = e.target.value;
-    if (creditCardInfo.expirationDate !== newExpirationDate) {
-      var newCreditCardInfo = _.cloneDeep(creditCardInfo);
-      newCreditCardInfo.expirationDate = newExpirationDate;
-      setCreditCardInfo(newCreditCardInfo);
+  const updateExpirationMonth = (e: any) => {
+    var newExpirationMonth = e.target.value;
+    if (creditCardInfo.expirationMonth !== newExpirationMonth) {
+      var newCreditCardInfo = {...creditCardInfo};
+      newCreditCardInfo.expirationMonth = newExpirationMonth;
+      props.shoppingCartHooks.setCreditCardInfo(newCreditCardInfo);
+    }
+  };
+  const updateExpirationYear = (e: any) => {
+    var newExpirationYear = e.target.value;
+    if (creditCardInfo.expirationYear !== newExpirationYear) {
+      var newCreditCardInfo = {...creditCardInfo};
+      newCreditCardInfo.expirationYear = newExpirationYear;
+      props.shoppingCartHooks.setCreditCardInfo(newCreditCardInfo);
     }
   };
   const updateCVV = (e: any) => {
     var newCVV = e.target.value;
     if (creditCardInfo.CVV !== newCVV) {
-      var newCreditCardInfo = _.cloneDeep(creditCardInfo);
+      var newCreditCardInfo = {...creditCardInfo};
       newCreditCardInfo.CVV = newCVV;
-      setCreditCardInfo(newCreditCardInfo);
+      props.shoppingCartHooks.setCreditCardInfo(newCreditCardInfo);
     }
   };
 
-  // Purchase Ticket Functionality
-  const [isProcessing, setProcessing] = useState(false);
-  const [purchaseResult, setPurchaseResult] = useState('');
-
-  useEffect(() => {
-    function simulateNetworkRequest() {
-      return new Promise((resolve) => setTimeout(resolve, 2000));
-    }
-
-    if (isProcessing) {
-      setPurchaseResult("");
-      simulateNetworkRequest().then(() => {
-        setProcessing(false);
-        setPurchaseResult("Purchase successful");
-      });
-    }
-  }, [isProcessing]);
-
-
-  const purchaseTickets = () => {
-    setProcessing(true);
-  }
-
   return (
-    <>
-      <Container>
-        <Row>
-          <div className="header">Payment Details</div>
-        </Row>
-        <Row>
-          <Col>
-            <FloatingLabel controlId="floatingCardNumber" label="Card Number" className="mb-3">
-              <Form.Control type="text" placeholder="0000 0000 0000 0000" disabled={isProcessing} value={creditCardInfo.cardNumber} onChange={updateCardNumber}/>
+    <Form>
+      <Row className="mb-1">
+        <h5>Payment Details</h5>
+      </Row>
+      <Row>
+        <Form.Group className="mb-2" controlId="formGroupCreditCard">
+          <Form.Label>Credit Card Number</Form.Label>
+          <FloatingLabel controlId="floatingCreditCard" label="#### #### #### ####">
+            <Form.Control type="text" placeholder="0000 0000 0000 0000" disabled={isPurchaseInProgress} value={creditCardInfo.cardNumber} onChange={updateCardNumber}/>
+          </FloatingLabel>
+        </Form.Group>
+      </Row>
+      <Row>
+        <Col md={3}>
+          <Form.Group className="mb-2" controlId="formGroupExpirationDate">
+            <Form.Label>Expiration Date</Form.Label>
+            <InputGroup>
+              <FloatingLabel controlId="floatingMM" label="MM">
+                <Form.Control type="text" placeholder="MM" disabled={isPurchaseInProgress} value={creditCardInfo.expirationMonth} onChange={updateExpirationMonth}/>
+              </FloatingLabel>
+              <InputGroup.Text>/</InputGroup.Text>
+              <FloatingLabel controlId="floatingYY" label="YY">
+                <Form.Control type="text" placeholder="YY" disabled={isPurchaseInProgress} value={creditCardInfo.expirationYear} onChange={updateExpirationYear}/>
+              </FloatingLabel>
+            </InputGroup>
+          </Form.Group>
+        </Col>
+        <Col md={3}>
+          <Form.Group className="mb-2" controlId="formGroupCVV">
+            <Form.Label>CVV</Form.Label>
+            <FloatingLabel controlId="floatingCVV" label="CVV">
+              <Form.Control type="text" placeholder="CVV" disabled={isPurchaseInProgress} value={creditCardInfo.CVV} onChange={updateCVV}/>
             </FloatingLabel>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs lg="2">
-            <FloatingLabel controlId="floatingExpirationMonth" label="Month" className="mb-3">
-              <Form.Control type="text" placeholder="MM" disabled={isProcessing} value={creditCardInfo.expirationDate} onChange={updateExpirationDate}/>
-            </FloatingLabel>
-          </Col>
-          <Col xs lg="2">
-            <FloatingLabel controlId="floatingExpirationYear" label="Year" className="mb-3">
-              <Form.Control type="text" placeholder="MM" disabled={isProcessing} value={creditCardInfo.expirationDate} onChange={updateExpirationDate}/>
-            </FloatingLabel>
-          </Col>
-          <Col xs lg="2">
-            <FloatingLabel controlId="floatingCVV" label="CVV" className="mb-3">
-              <Form.Control type="text" placeholder="CVV" disabled={isProcessing} value={creditCardInfo.CVV} onChange={updateCVV}/>
-            </FloatingLabel>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs lg="4">
-            <div className="d-grid gap-2">
-              <Button variant="primary" size="lg" disabled={isProcessing} onClick={!isProcessing ? purchaseTickets : undefined}>Get Tickets</Button>
-            </div>
-          </Col>
-          <Col>
-            <div className="header">{purchaseResult}</div>
-          </Col>
-        </Row>
-      </Container>
-    </>
+          </Form.Group>
+        </Col>
+      </Row>
+    </Form>
   );
 }
 

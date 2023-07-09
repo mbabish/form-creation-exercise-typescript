@@ -2,40 +2,45 @@
 import currencyFormatter from "../../helpers/currencyFormatter";
 
 // External components
-import { Container, Row, Col } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 
 // Props
-import ITicketTypeProps from '../../interfaces/ITicketTypeProps';
+import ITicketTypeProps from '../../interfaces/ticketDetails/ITicketTypeProps';
+import IShoppingCartHooks from "../../interfaces/shoppingCart/IShoppingCartHooks";
+import IProduct from "../../interfaces/shoppingCart/IProduct";
 
 // Implementation
-function TicketInfo(props: { ticket: ITicketTypeProps, shoppingCart: any, updateTicketAmount: any }) {
+function TicketInfo(props: { productType: string, productName: string, ticket: ITicketTypeProps, shoppingCartHooks: IShoppingCartHooks }) {
+
+  // Alias for shopping cart hook properties
+  var isPurchaseInProgress = props.shoppingCartHooks.isPurchaseInProgress;
+
+  var product: IProduct = {
+    type: props.productType,
+    name: props.productName,
+    description: props.ticket.description,
+    cost: props.ticket.cost
+
+  }
 
   const getNumberOfTickets = () => {
-    return (
-      props.shoppingCart
-      && props.shoppingCart.tickets
-      && props.shoppingCart.tickets.get(props.ticket.type)
-    ) ? props.shoppingCart.tickets.get(props.ticket.type).number : 0;
+    return props.shoppingCartHooks ? props.shoppingCartHooks.getProductAmount(product.type) : 0;
   }
 
   const onValueChanged = (e: any) => {
     var newTicketNumber = e.target.value;
-    props.updateTicketAmount(props.ticket.type, props.ticket.cost, newTicketNumber);
+    props.shoppingCartHooks.updateProductAmount(product, newTicketNumber);
   }
 
   return (
-    <Container>
-      <Row>
-        <Col>
-        <h4>{props.ticket.name}</h4>
-        <div>{props.ticket.description}</div>
-        <div>{currencyFormatter.format(props.ticket.cost / 100)}</div>
-        </Col>
-        <Col xs lg="2">
-          <input type="number" min="0" className="form-control" value={getNumberOfTickets()} onChange={onValueChanged}/>
-        </Col>
-      </Row>
-    </Container>
+    <Stack>
+      <Stack direction="horizontal">
+        <h4 className="col-md-10 mb-3">{props.ticket.name}</h4>
+        <input type="number" min="0" className="form-control mb-3" disabled={isPurchaseInProgress} value={getNumberOfTickets()} onChange={onValueChanged}/>
+      </Stack>
+      <div className="mb-2">{props.ticket.description}</div>
+      <div className="mb-2">{currencyFormatter.format(product.cost / 100)}</div>
+    </Stack>
   );
 }
 

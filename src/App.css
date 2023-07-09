@@ -1,13 +1,4 @@
-hr.divider {
-  margin-top: 20px;
-}
-
-h4.header {
-  margin-top: 0.5rem;
-}
-
-div.header {
-  margin-left: 10px;
-  font-size: large;
-  font-weight: bold;
+#root {
+  padding-top: 20px;
+  padding-bottom: 30px;
 }

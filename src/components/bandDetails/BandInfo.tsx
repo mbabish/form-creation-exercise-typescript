@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import { Card } from 'react-bootstrap';
 
 // Props
-import IBandInfoProps from '../../interfaces/IBandInfoProps';
+import IBandInfoProps from '../../interfaces/bandDetails/IBandInfoProps';
 
 // Implementation
 function BandInfo(props: { band: IBandInfoProps }) {

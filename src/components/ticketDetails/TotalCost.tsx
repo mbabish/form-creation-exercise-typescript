@@ -2,21 +2,15 @@
 import currencyFormatter from "../../helpers/currencyFormatter";
 
 // External components
-import { Container, Row, Col } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 
 // Implementation
 function TotalCost(props : { totalCost: number }) {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h4 className='header'>TOTAL</h4>
-        </Col>
-        <Col xs lg="2">
-          <input type="text" min="0" className="form-control" value={currencyFormatter.format(props.totalCost / 100)} readOnly/>
-        </Col>
-      </Row>
-    </Container>
+    <Stack direction="horizontal" className="col-md-11">
+      <h4 className="col-md-10">Total Cost</h4>
+      <input type="text" min="0" className="form-control" value={currencyFormatter.format(props.totalCost / 100)} readOnly disabled />
+    </Stack>
   );
 }
 

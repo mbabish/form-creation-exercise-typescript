@@ -2,20 +2,18 @@
 import { ListGroup } from 'react-bootstrap';
 
 // Internal components
-import TicketInfo from './TicketInfo';
+import TicketListItem from './TicketListItem';
 
 // Props
-import ITicketTypeProps from '../../interfaces/ITicketTypeProps';
+import ITicketTypeProps from '../../interfaces/ticketDetails/ITicketTypeProps';
+import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
+import IBandProps from '../../interfaces/IBandProps';
 
 // Implementation
-function TicketList (props: { ticketTypes: Array<ITicketTypeProps>, shoppingCart: any, updateTicketAmount: any }) {
+function TicketList (props: { band: IBandProps, ticketTypes: Array<ITicketTypeProps>, shoppingCartHooks: IShoppingCartHooks }) {
   return (
     <ListGroup>
-      {props.ticketTypes.map((ticket) => (
-        <ListGroup.Item key={ticket.type}>
-          <TicketInfo ticket={ticket} shoppingCart={props.shoppingCart} updateTicketAmount={props.updateTicketAmount} />
-        </ListGroup.Item>
-      ))}
+      { props.ticketTypes.map((ticketType) => <TicketListItem band={props.band} ticketType={ticketType} shoppingCartHooks={props.shoppingCartHooks} />) }
     </ListGroup>
   );
 }

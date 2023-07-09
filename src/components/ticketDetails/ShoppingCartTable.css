@@ -1,0 +1,7 @@
+th.tableCenter, td.tableCenter {
+  text-align: center;
+}
+
+th.tableRight, td.tableRight {
+  text-align: right;
+}

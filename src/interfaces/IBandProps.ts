@@ -1,5 +1,5 @@
-import IBandDetailsProps from './IBandDetailsProps';
-import ITicketTypeProps from './ITicketTypeProps';
+import IBandDetailsProps from './bandDetails/IBandDetailsProps';
+import ITicketTypeProps from './ticketDetails/ITicketTypeProps';
 
 interface IBandProps extends IBandDetailsProps {
   ticketTypes: Array<ITicketTypeProps>;

@@ -1,23 +1,25 @@
+// CSS
+import './CheckoutForm.css';
+
 // External components
-import { ListGroup } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 
 // Internal components
-import TotalCost from './TotalCost';
 import ContactInfo from './ContactInfo';
 import CreditCardInfo from './CreditCardInfo';
 
+// Props
+import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
+import PurchaseButton from './PurchaseButton';
+
 // Implementation
-function CheckoutForm(props: { totalCost: { cost: number } }) {
+function CheckoutForm(props: { shoppingCartHooks: IShoppingCartHooks }) {
   return (
-    <ListGroup>
-      <ListGroup.Item>
-        <TotalCost totalCost={props.totalCost.cost} />
-      </ListGroup.Item>
-      <ListGroup.Item>
-        <ContactInfo />
-        <CreditCardInfo />
-      </ListGroup.Item>
-    </ListGroup>
+    <Stack gap={1}>
+      <ContactInfo shoppingCartHooks={props.shoppingCartHooks} />
+      <CreditCardInfo shoppingCartHooks={props.shoppingCartHooks} />
+      <PurchaseButton shoppingCartHooks={props.shoppingCartHooks} />
+    </Stack>
   );
 }
 
