@@ -1,11 +1,11 @@
 // CSS
 import './Icon.css';
 
-// Props
-import IIconProps from '../interfaces/IIconProps';
+// Properties
+import IIcon from '../interfaces/IIcon';
 
 // Implementation
-function Icon (props: IIconProps) {
+function Icon (props: IIcon) {
   return (
     <img src={"./assets/img/" + props.iconName + ".png"} className="icon" alt={ props.iconName + "icon"}/>
   );

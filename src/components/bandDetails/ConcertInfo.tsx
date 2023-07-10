@@ -7,11 +7,11 @@ import { ListGroup, Stack } from 'react-bootstrap';
 // Internal Components
 import Icon from '../Icon';
 
-// Props
-import IConcertInfoProps from '../../interfaces/bandDetails/IConcertInfoProps';
+// Properties
+import IConcertInfo from '../../interfaces/bandDetails/IConcertInfo';
 
 // Implementation
-function ConcertInfo(props: { concert: IConcertInfoProps }) {
+function ConcertInfo(props: { concert: IConcertInfo }) {
   // Format the date string
   var concertDate: string = moment(props.concert.date).format('dddd, MMMM D, YYYY');
   return (

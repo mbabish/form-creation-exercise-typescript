@@ -3,8 +3,7 @@ import ICreditCardInfo from "./ICreditCardInfo";
 const DefaultCreditCardInfo = () => {
   return {
     cardNumber: '',
-    expirationMonth: '',
-    expirationYear: '',
+    expirationDate: '',
     CVV: ''
   } as ICreditCardInfo;
 }

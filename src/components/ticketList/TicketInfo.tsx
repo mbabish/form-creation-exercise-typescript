@@ -4,13 +4,13 @@ import currencyFormatter from "../../helpers/currencyFormatter";
 // External components
 import { Stack } from 'react-bootstrap';
 
-// Props
-import ITicketTypeProps from '../../interfaces/ticketDetails/ITicketTypeProps';
+// Properties
+import ITicketType from '../../interfaces/ticketDetails/ITicketType';
 import IShoppingCartHooks from "../../interfaces/shoppingCart/IShoppingCartHooks";
 import IProduct from "../../interfaces/shoppingCart/IProduct";
 
 // Implementation
-function TicketInfo(props: { productType: string, productName: string, ticket: ITicketTypeProps, shoppingCartHooks: IShoppingCartHooks }) {
+function TicketInfo(props: { productType: string, productName: string, ticket: ITicketType, shoppingCartHooks: IShoppingCartHooks }) {
 
   // Alias for shopping cart hook properties
   var isPurchaseInProgress = props.shoppingCartHooks.isPurchaseInProgress;

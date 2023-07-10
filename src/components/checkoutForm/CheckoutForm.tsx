@@ -7,10 +7,10 @@ import { Stack } from 'react-bootstrap';
 // Internal components
 import ContactInfo from './ContactInfo';
 import CreditCardInfo from './CreditCardInfo';
-
-// Props
-import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
 import PurchaseButton from './PurchaseButton';
+
+// Properties
+import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
 
 // Implementation
 function CheckoutForm(props: { shoppingCartHooks: IShoppingCartHooks }) {

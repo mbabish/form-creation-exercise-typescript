@@ -1,6 +1,8 @@
-// Props
-import ICartItem from '../../interfaces/shoppingCart/ICartItem';
+// Internal libraries
 import currencyFormatter from '../../helpers/currencyFormatter';
+
+// Properties
+import ICartItem from '../../interfaces/shoppingCart/ICartItem';
 
 // Implementation
 function ShoppingCartRow(props: { cartItem: ICartItem }) {

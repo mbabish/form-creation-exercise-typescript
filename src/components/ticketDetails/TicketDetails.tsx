@@ -2,20 +2,20 @@
 import { Stack, Accordion } from 'react-bootstrap';
 
 // Internal components
-import TicketList from './TicketList';
-import CheckoutForm from './CheckoutForm';
+import TicketList from '../ticketList/TicketList';
+import TotalCost from './TotalCost';
+import ShoppingCartTable from '../shoppingCart/ShoppingCartTable';
+import CheckoutForm from '../checkoutForm/CheckoutForm';
 
 // Internal hooks
 import useShoppingCart from "../../hooks/useShoppingCart";
 
-// Props
-import IBandProps from '../../interfaces/IBandProps';
+// Properties
+import IBand from '../../interfaces/IBand';
 import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
-import TotalCost from './TotalCost';
-import ShoppingCartTable from './ShoppingCartTable';
 
 // Implementation
-function TicketDetails(props: { band: IBandProps }) {
+function TicketDetails(props: { band: IBand }) {
 
   // Initialize the shopping cart
   /* NOTE:
@@ -45,15 +45,22 @@ function TicketDetails(props: { band: IBandProps }) {
             <ShoppingCartTable shoppingCartHooks={shoppingCartHooks}/>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>
-            <h4 className="col-md-10">Checkout</h4>
-          </Accordion.Header>
-          <Accordion.Body>
-            <CheckoutForm shoppingCartHooks={shoppingCartHooks}/>
-          </Accordion.Body>
-        </Accordion.Item>
+        { shoppingCartHooks.getTotalCost() > 0 &&
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>
+              <h4 className="col-md-10">Checkout</h4>
+            </Accordion.Header>
+            <Accordion.Body>
+              <CheckoutForm shoppingCartHooks={shoppingCartHooks}/>
+            </Accordion.Body>
+          </Accordion.Item>
+        }
       </Accordion>
+      { shoppingCartHooks.purchaseResult && (shoppingCartHooks.purchaseResult !== "") &&
+      <div className="checkoutHeader">
+        {shoppingCartHooks.purchaseResult}
+      </div>
+      }
     </Stack>
   );
 };

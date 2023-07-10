@@ -1,8 +1,8 @@
-interface ITicketTypeProps {
+interface ITicketType {
   type: string;
   name: string;
   description: string;
   cost: number // units: pennies
 }
 
-export default ITicketTypeProps;
+export default ITicketType;

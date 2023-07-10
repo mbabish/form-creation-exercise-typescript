@@ -5,11 +5,11 @@ import { Stack } from 'react-bootstrap';
 import BandInfo from './BandInfo';
 import ConcertInfo from './ConcertInfo';
 
-// Props
-import IBandDetailsProps from '../../interfaces/bandDetails/IBandDetailsProps';
+// Properties
+import IBandDetails from '../../interfaces/bandDetails/IBandDetails';
 
 // Implementation
-function BandDetails(props: { band: IBandDetailsProps }) {
+function BandDetails(props: { band: IBandDetails }) {
   return (
     <Stack gap={3} className="col-md-4">
       <h2>{props.band.name}</h2>

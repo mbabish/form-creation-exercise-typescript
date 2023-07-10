@@ -4,13 +4,13 @@ import { ListGroup } from 'react-bootstrap';
 // Internal components
 import TicketInfo from './TicketInfo';
 
-// Props
-import ITicketTypeProps from '../../interfaces/ticketDetails/ITicketTypeProps';
+// Properties
+import ITicketType from '../../interfaces/ticketDetails/ITicketType';
 import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
-import IBandDetailsProps from '../../interfaces/bandDetails/IBandDetailsProps';
+import IBandDetails from '../../interfaces/bandDetails/IBandDetails';
 
 // Implementation
-function TicketListItem (props : { band: IBandDetailsProps, ticketType: ITicketTypeProps, shoppingCartHooks: IShoppingCartHooks }) {
+function TicketListItem (props : { band: IBandDetails, ticketType: ITicketType, shoppingCartHooks: IShoppingCartHooks }) {
   var productType: string = props.band.id + '.' + props.ticketType.type;
   var productName: string = props.band.name + ': ' + props.ticketType.name;
   return (

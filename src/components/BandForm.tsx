@@ -5,11 +5,11 @@ import { Stack } from 'react-bootstrap';
 import BandDetails from './bandDetails/BandDetails';
 import TicketDetails from './ticketDetails/TicketDetails';
 
-// Props
-import IBandProps from '../interfaces/IBandProps';
+// Properties
+import IBand from '../interfaces/IBand';
 
 // Implementation
-function BandForm(props: { band: IBandProps }) {
+function BandForm(props: { band: IBand }) {
   return (
     <Stack direction="horizontal" gap={4}>
       <BandDetails band={props.band} />

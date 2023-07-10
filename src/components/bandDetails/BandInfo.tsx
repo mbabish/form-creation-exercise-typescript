@@ -3,11 +3,11 @@ import DOMPurify from 'dompurify';
 // External components
 import { Card } from 'react-bootstrap';
 
-// Props
-import IBandInfoProps from '../../interfaces/bandDetails/IBandInfoProps';
+// Properties
+import IBandInfo from '../../interfaces/bandDetails/IBandInfo';
 
 // Implementation
-function BandInfo(props: { band: IBandInfoProps }) {
+function BandInfo(props: { band: IBandInfo }) {
   // Sanitize the HTML from the band description
   var cleanDescription: string = DOMPurify.sanitize(props.band.description_blurb, { USE_PROFILES: { html: true } });
   return (

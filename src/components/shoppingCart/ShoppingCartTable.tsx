@@ -6,7 +6,7 @@ import { Table } from 'react-bootstrap';
 
 // Internal components
 
-// Props
+// Properties
 import IShoppingCartHooks from '../../interfaces/shoppingCart/IShoppingCartHooks';
 import ShoppingCartRow from './ShoppingCartRow';
 
